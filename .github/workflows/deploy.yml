@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Executing remote ssh commands using password
+      - name: Executing remote ssh commands using SSH_KEY
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
