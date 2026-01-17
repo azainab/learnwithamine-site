@@ -15,7 +15,7 @@
     <h1>🚀 Welcome to LearnWithAmine</h1>
     <p style="text-align: center; font-size: 18px "> Immigration guidance for US/Canada, visa applications (F1, OPT, Express Entry, PNP), form tutorials (imm5669e, DS-11, SINP), passport/OCI processes, and personal experiences (US F1 visa, CPT). </p>
 
-    <a href="https://youtube.com/@learnwithamine" class="youtube" target="_blank">
+    <a href="https://www.youtube.com/@LearnwithAmine" class="youtube" target="_blank">
         📺 Watch on YouTube
     </a>
 
