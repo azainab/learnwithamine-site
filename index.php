@@ -15,6 +15,7 @@
     <h1 style="
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+<<<<<<< HEAD
         padding: 20px 40px;
         margin: 20px auto;
         border-radius: 15px;
@@ -24,6 +25,18 @@
         box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         width: calc(100% + 40px);
         max-width: 800px;
+=======
+        padding: 30px 20px;
+        margin: -20px -20px 40px -20px;  /* Full viewport width */
+        border-radius: 0 0 20px 20px;    /* Bottom corners only */
+        font-size: 2.5em;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% + 40px);        /* Edge-to-edge */
+>>>>>>> 115c4b8096f28ac9241631e5f361ee2fe63c5204
     ">🚀 Welcome to LearnWithAmine</h1>
     <p style="text-align: center; font-size: 20px; line-height: 1.6;">
         Immigration guidance for US/Canada<br>
