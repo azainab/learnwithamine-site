@@ -42,7 +42,7 @@
 
     <div id="chatbot" style="position:fixed;bottom:20px;right:20px;width:350px;height:500px;background:white;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.3);display:none;z-index:1000;">
         <div style="background:#667eea;color:white;padding:15px;border-radius:15px 15px 0 0;">
-            Immigration Bot 🚀
+            How can I help 🚀
             <button onclick="toggleChat()" style="float:right;background:none;border:none;color:white;font-size:20px;">×</button>
         </div>
         <div id="chat-messages" style="height:380px;overflow-y:auto;padding:15px;"></div>
