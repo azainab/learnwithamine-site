@@ -37,6 +37,6 @@ async def chat_endpoint(request: Request):
                 reply = response
                 break
 
-        return JSONResponse(content={'response': reply})
+        return {'response': reply}  # Match PHP key
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON input")
