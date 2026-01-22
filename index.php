@@ -1,5 +1,35 @@
+<?php
+// LOAD .env (TOP!)
+$lines = file('.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+foreach ($lines as $line) {
+    if (strpos(trim($line), '#') === 0) continue;
+    if (!preg_match('/^\s*([\w.-]+)\s*=\s*(.*)\s*$/', $line, $match)) continue;
+    putenv(sprintf('%s=%s', $match[1], $match[2]));
+}
+
+$apiKey = getenv('YOUTUBE_API_KEY');
+
+// YouTube function
+function getYouTubeInfo($videoId) {
+    global $apiKey;
+    $url = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=$videoId&key=$apiKey";
+    $data = @json_decode(file_get_contents($url), true);
+    if (isset($data['items'][0]['snippet'])) {
+        return [
+            'title' => $data['items'][0]['snippet']['title'],
+            'thumb' => $data['items'][0]['snippet']['thumbnails']['medium']['url']
+        ];
+    }
+    return ['title' => 'YouTube Video', 'thumb' => "https://img.youtube.com/vi/$videoId/mqdefault.jpg"];
+}
+
+$videoId = "RynonMlwPDs";  // Your passport video
+$videoInfo = getYouTubeInfo($videoId);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +37,11 @@
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f4f4f4; }
         h1 { color: #333; text-align: center; }
-        .youtube { display: block; margin: 20px auto; text-align: center; font-size: 24px; }
+        <style>
+        .youtube-embed { margin: 10px 0;max-width: 100%;}
+        .youtube-embed iframe {width: 100%; max-width: 560px; height: 315px;}
+        </style>
+
         footer { text-align: center; margin-top: 40px; color: #666; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5430927785225498"
@@ -46,9 +80,15 @@
         Form tutorials (imm5669e, DS-11, SINP)<br>
         Passport/OCI processes, and personal experiences (US F1 visa, CPT)
     </p>
-    <a href="https://youtu.be/RynonMlwPDs" class="youtube" target="_blank">
-        📺 Watch on YouTube
+    <a href="https://www.youtube.com/watch?v=RynonMlwPDs" target="_blank">
+      <img src="https://img.youtube.com/vi/RynonMlwPDs/mqdefault.jpg"
+           alt="Indian Passport Renewal in USA - VFS Global 2024"
+           style="width:100%; max-width:560px; height:315px; object-fit:cover; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+      <div style="margin-top:8px; font-size:14px; color:#666;">
+        🔴 Indian Passport Renewal USA (VFS) - Latest 2024 Guide (41min)
+      </div>
     </a>
+
 
     <footer style="text-align: center; margin-top: 40px; color: #666; font-size: 14px;">
         &copy; <?php echo date('Y'); ?> All Rights Reserved | LearnWithAmine.com
@@ -104,8 +144,27 @@
     }
 
     function addMessage(sender, text) {
+        // Extract YouTube video ID
+        const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/g;
+        let processedText = text;
+
+        // Replace YouTube links with embed iframes
+        processedText = processedText.replace(youtubeRegex, function(match, videoId) {
+            return `<div class="youtube-embed">
+                <iframe width="100%" height="315"
+                        src="https://www.youtube.com/embed/${videoId}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>`;
+        });
+
+        // Replace newlines
+        processedText = processedText.replace(/\n/g, '<br>');
+
         const div = document.createElement('div');
-        div.innerHTML = `<strong>${sender}:</strong> ${text.replace(/\n/g,'<br>')}`;
+        div.innerHTML = `<strong>${sender}:</strong> ${processedText}`;
         document.getElementById('chat-messages').appendChild(div);
         div.scrollIntoView();
     }
