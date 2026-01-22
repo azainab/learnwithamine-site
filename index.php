@@ -10,6 +10,8 @@
         .youtube { display: block; margin: 20px auto; text-align: center; font-size: 24px; }
         footer { text-align: center; margin-top: 40px; color: #666; }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5430927785225498"
+     crossorigin="anonymous"></script>
 </head>
 <body>
     <h1 style="
